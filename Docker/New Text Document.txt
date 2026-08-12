@@ -1,0 +1,4 @@
+PS D:\3D Query Builder\Change-Detecting\Docker> docker compose up -d
+[+] up 1/1
+ ✔ Container opencd-cpu Started                                                                                                                 0.9s
+PS D:\3D Query Builder\Change-Detecting\Docker> docker compose exec opencd-cpu bash

@@ -1,0 +1,26 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+torch==2.1.2+cpu
+torchvision==0.16.2+cpu
+
+openmim==0.3.9
+
+mmengine==0.10.4
+mmcv-lite==2.1.0
+mmdet==3.3.0
+mmsegmentation==1.2.2
+
+numpy==1.26.4
+scipy==1.11.4
+
+opencv-python==4.10.0.84
+Pillow==10.4.0
+matplotlib==3.8.4
+
+PyYAML==6.0.2
+tqdm==4.66.5
+rich==13.8.0
+prettytable==3.11.0
+packaging==24.1
+addict==2.4.0
+yapf==0.40.2

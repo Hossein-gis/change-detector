@@ -1,0 +1,505 @@
+2026/07/18 16:55:34 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.8.20 (default, Sep 27 2024, 06:05:23) [GCC 12.2.0]
+    CUDA available: False
+    MUSA available: False
+    numpy_random_seed: 308945477
+    GCC: gcc (Debian 12.2.0-14+deb12u1) 12.2.0
+    PyTorch: 1.13.1+cpu
+    PyTorch compiling details: PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201402
+  - Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191122 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.6.0 (Git Hash 52b5f107dd9cf10910aaa19cb47f3abf9b349815)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -fabi-version=11 -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wunused-local-typedefs -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.13.1, USE_CUDA=0, USE_CUDNN=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+    TorchVision: 0.14.1+cpu
+    OpenCV: 5.0.0
+    MMEngine: 0.10.4
+
+Runtime environment:
+    cudnn_benchmark: True
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    dist_cfg: {'backend': 'nccl'}
+    seed: 308945477
+    Distributed launcher: none
+    Distributed training: False
+    GPU number: 1
+------------------------------------------------------------
+
+2026/07/18 16:55:34 - mmengine - INFO - Config:
+crop_size = (
+    512,
+    512,
+)
+data_preprocessor = dict(
+    bgr_to_rgb=True,
+    mean=[
+        123.675,
+        116.28,
+        103.53,
+        123.675,
+        116.28,
+        103.53,
+    ],
+    pad_val=0,
+    seg_pad_val=255,
+    size_divisor=32,
+    std=[
+        58.395,
+        57.12,
+        57.375,
+        58.395,
+        57.12,
+        57.375,
+    ],
+    test_cfg=dict(size_divisor=32),
+    type='DualInputSegDataPreProcessor')
+data_root = 'data/LEVIR-CD'
+dataset_type = 'LEVIR_CD_Dataset'
+default_hooks = dict(
+    checkpoint=dict(
+        by_epoch=False, interval=4000, save_best='mIoU',
+        type='CheckpointHook'),
+    logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    timer=dict(type='IterTimerHook'),
+    visualization=dict(
+        img_shape=(
+            1024,
+            1024,
+            3,
+        ), interval=1, type='CDVisualizationHook'))
+default_scope = 'opencd'
+env_cfg = dict(
+    cudnn_benchmark=True,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+img_ratios = [
+    0.75,
+    1.0,
+    1.25,
+]
+launcher = 'none'
+load_from = None
+log_level = 'INFO'
+log_processor = dict(by_epoch=False)
+model = dict(
+    backbone=dict(
+        contract_dilation=True,
+        depth=18,
+        dilations=(
+            1,
+            1,
+            1,
+            1,
+        ),
+        init_cfg=dict(
+            checkpoint='open-mmlab://resnet18_v1c', type='Pretrained'),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        norm_eval=False,
+        num_stages=4,
+        out_indices=(
+            0,
+            1,
+            2,
+            3,
+        ),
+        strides=(
+            1,
+            2,
+            2,
+            2,
+        ),
+        style='pytorch',
+        type='mmseg.ResNetV1c'),
+    data_preprocessor=dict(
+        bgr_to_rgb=True,
+        mean=[
+            123.675,
+            116.28,
+            103.53,
+            123.675,
+            116.28,
+            103.53,
+        ],
+        pad_val=0,
+        seg_pad_val=255,
+        size_divisor=32,
+        std=[
+            58.395,
+            57.12,
+            57.375,
+            58.395,
+            57.12,
+            57.375,
+        ],
+        test_cfg=dict(size_divisor=32),
+        type='DualInputSegDataPreProcessor'),
+    decode_head=dict(
+        changemixin_cfg=dict(in_channels=256, inner_channels=96, num_convs=1),
+        channels=96,
+        in_channels=[
+            1,
+            1,
+            1,
+            1,
+            1,
+        ],
+        in_index=[
+            0,
+            1,
+            2,
+            3,
+            4,
+        ],
+        inference_mode='t1t2',
+        loss_decode=[
+            dict(
+                loss_name='loss_ce',
+                loss_weight=1.0,
+                type='mmseg.CrossEntropyLoss',
+                use_sigmoid=True),
+            dict(
+                loss_name='loss_dice',
+                loss_weight=1.0,
+                type='mmseg.DiceLoss',
+                use_sigmoid=True),
+        ],
+        num_classes=2,
+        out_channels=1,
+        seg_head_cfg=dict(
+            align_corners=False,
+            channels=128,
+            dropout_ratio=0.0,
+            fsr_channels=256,
+            in_channels=[
+                256,
+                256,
+                256,
+                256,
+                512,
+            ],
+            in_index=[
+                0,
+                1,
+                2,
+                3,
+                4,
+            ],
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            type='FarSegHead'),
+        threshold=0.5,
+        type='ChangeStarHead'),
+    neck=dict(
+        in_channels=[
+            64,
+            128,
+            256,
+            512,
+        ],
+        num_outs=4,
+        out_channels=256,
+        policy='concat',
+        type='FarSegFPN'),
+    pretrained=None,
+    test_cfg=dict(mode='whole'),
+    train_cfg=dict(),
+    type='SiamEncoderDecoder')
+norm_cfg = dict(requires_grad=True, type='SyncBN')
+optim_wrapper = dict(
+    optimizer=dict(
+        betas=(
+            0.9,
+            0.999,
+        ), lr=0.001, type='AdamW', weight_decay=0.01),
+    type='OptimWrapper')
+optimizer = dict(
+    betas=(
+        0.9,
+        0.999,
+    ), lr=0.001, type='AdamW', weight_decay=0.01)
+param_scheduler = [
+    dict(
+        begin=0, by_epoch=False, end=1000, start_factor=1e-06,
+        type='LinearLR'),
+    dict(
+        begin=1000,
+        by_epoch=False,
+        end=40000,
+        eta_min=0.0,
+        power=1.0,
+        type='PolyLR'),
+]
+resume = False
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path_from='test/A',
+            img_path_to='test/B',
+            seg_map_path='test/label'),
+        data_root='data/LEVIR-CD',
+        pipeline=[
+            dict(type='MultiImgLoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                1024,
+                1024,
+            ), type='MultiImgResize'),
+            dict(type='MultiImgLoadAnnotations'),
+            dict(type='MultiImgPackSegInputs'),
+        ],
+        type='LEVIR_CD_Dataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    iou_metrics=[
+        'mFscore',
+        'mIoU',
+    ], type='mmseg.IoUMetric')
+test_pipeline = [
+    dict(type='MultiImgLoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        1024,
+        1024,
+    ), type='MultiImgResize'),
+    dict(type='MultiImgLoadAnnotations'),
+    dict(type='MultiImgPackSegInputs'),
+]
+train_cfg = dict(max_iters=40000, type='IterBasedTrainLoop', val_interval=4000)
+train_dataloader = dict(
+    batch_size=16,
+    dataset=dict(
+        data_prefix=dict(
+            img_path_from='train/A',
+            img_path_to='train/B',
+            seg_map_path='train/label'),
+        data_root='data/LEVIR-CD',
+        pipeline=[
+            dict(type='MultiImgLoadImageFromFile'),
+            dict(type='MultiImgLoadAnnotations'),
+            dict(degree=180, prob=0.5, type='MultiImgRandomRotate'),
+            dict(
+                cat_max_ratio=0.75,
+                crop_size=(
+                    512,
+                    512,
+                ),
+                type='MultiImgRandomCrop'),
+            dict(direction='horizontal', prob=0.5, type='MultiImgRandomFlip'),
+            dict(direction='vertical', prob=0.5, type='MultiImgRandomFlip'),
+            dict(
+                brightness_delta=10,
+                contrast_range=(
+                    0.8,
+                    1.2,
+                ),
+                hue_delta=10,
+                saturation_range=(
+                    0.8,
+                    1.2,
+                ),
+                type='MultiImgPhotoMetricDistortion'),
+            dict(type='MultiImgPackSegInputs'),
+        ],
+        type='LEVIR_CD_Dataset'),
+    num_workers=8,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='InfiniteSampler'))
+train_pipeline = [
+    dict(type='MultiImgLoadImageFromFile'),
+    dict(type='MultiImgLoadAnnotations'),
+    dict(degree=180, prob=0.5, type='MultiImgRandomRotate'),
+    dict(
+        cat_max_ratio=0.75, crop_size=(
+            512,
+            512,
+        ), type='MultiImgRandomCrop'),
+    dict(direction='horizontal', prob=0.5, type='MultiImgRandomFlip'),
+    dict(direction='vertical', prob=0.5, type='MultiImgRandomFlip'),
+    dict(
+        brightness_delta=10,
+        contrast_range=(
+            0.8,
+            1.2,
+        ),
+        hue_delta=10,
+        saturation_range=(
+            0.8,
+            1.2,
+        ),
+        type='MultiImgPhotoMetricDistortion'),
+    dict(type='MultiImgPackSegInputs'),
+]
+tta_model = dict(type='mmseg.SegTTAModel')
+tta_pipeline = [
+    dict(backend_args=None, type='MultiImgLoadImageFromFile'),
+    dict(
+        transforms=[
+            [
+                dict(
+                    keep_ratio=True, scale_factor=0.75, type='MultiImgResize'),
+                dict(keep_ratio=True, scale_factor=1.0, type='MultiImgResize'),
+                dict(
+                    keep_ratio=True, scale_factor=1.25, type='MultiImgResize'),
+            ],
+            [
+                dict(
+                    direction='horizontal',
+                    prob=0.0,
+                    type='MultiImgRandomFlip'),
+                dict(
+                    direction='horizontal',
+                    prob=1.0,
+                    type='MultiImgRandomFlip'),
+            ],
+            [
+                dict(type='MultiImgLoadAnnotations'),
+            ],
+            [
+                dict(type='MultiImgPackSegInputs'),
+            ],
+        ],
+        type='TestTimeAug'),
+]
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path_from='val/A',
+            img_path_to='val/B',
+            seg_map_path='val/label'),
+        data_root='data/LEVIR-CD',
+        pipeline=[
+            dict(type='MultiImgLoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                1024,
+                1024,
+            ), type='MultiImgResize'),
+            dict(type='MultiImgLoadAnnotations'),
+            dict(type='MultiImgPackSegInputs'),
+        ],
+        type='LEVIR_CD_Dataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    iou_metrics=[
+        'mFscore',
+        'mIoU',
+    ], type='mmseg.IoUMetric')
+vis_backends = [
+    dict(type='CDLocalVisBackend'),
+]
+visualizer = dict(
+    alpha=1.0,
+    name='visualizer',
+    type='CDLocalVisualizer',
+    vis_backends=[
+        dict(type='CDLocalVisBackend'),
+    ])
+work_dir = './ckpt'
+
+2026/07/18 16:55:36 - mmengine - INFO - Distributed training is not used, all SyncBatchNorm (SyncBN) layers in the model will be automatically reverted to BatchNormXd layers if they are used.
+2026/07/18 16:55:36 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) CDVisualizationHook                
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) CDVisualizationHook                
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) CDVisualizationHook                
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2026/07/18 16:55:37 - mmengine - WARNING - Failed to search registry with scope "opencd" in the "optimizer wrapper constructor" registry tree. As a workaround, the current "optimizer wrapper constructor" registry in "mmengine" is used to build instance. This may cause unexpected failure when running the built modules. Please check whether "opencd" is a correct scope, or whether the registry is initialized.
+2026/07/18 16:55:37 - mmengine - WARNING - Failed to search registry with scope "opencd" in the "optimizer" registry tree. As a workaround, the current "optimizer" registry in "mmengine" is used to build instance. This may cause unexpected failure when running the built modules. Please check whether "opencd" is a correct scope, or whether the registry is initialized.
+2026/07/18 16:55:37 - mmengine - WARNING - Failed to search registry with scope "opencd" in the "optim_wrapper" registry tree. As a workaround, the current "optim_wrapper" registry in "mmengine" is used to build instance. This may cause unexpected failure when running the built modules. Please check whether "opencd" is a correct scope, or whether the registry is initialized.
+2026/07/18 16:55:37 - mmengine - WARNING - Failed to search registry with scope "opencd" in the "parameter scheduler" registry tree. As a workaround, the current "parameter scheduler" registry in "mmengine" is used to build instance. This may cause unexpected failure when running the built modules. Please check whether "opencd" is a correct scope, or whether the registry is initialized.
+2026/07/18 16:55:39 - mmengine - WARNING - The prefix is not set in metric class IoUMetric.
+2026/07/18 16:55:41 - mmengine - INFO - load model from: open-mmlab://resnet18_v1c
+2026/07/18 16:55:41 - mmengine - INFO - Loads checkpoint by openmmlab backend from path: open-mmlab://resnet18_v1c

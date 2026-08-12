@@ -1,0 +1,49 @@
+# ============================================================
+# Project:      OpenCD Change Detection
+# Version:      v1.0
+# Created:      2026-07-10
+# Purpose:      Wheel manifest with SHA256 checksums
+# Last Updated: 2026-07-10
+# ============================================================
+#
+# This file is auto-generated. Do not edit manually.
+#
+# To regenerate:
+#   pip download -r requirements/runtime.txt -d ./wheels/
+#   Then compute SHA256 for each .whl file in wheels/
+#
+# Format: <filename>  sha256:<hash>
+#
+# NOTE: This file serves as a verification manifest.
+#       The actual wheels must be present in the wheels/ directory.
+
+# === Populate after running pip download ===
+# Example entries:
+# addict-2.4.0-py3-none-any.whl  sha256:<computed_hash>
+# certifi-2024.2.2-py3-none-any.whl  sha256:<computed_hash>
+# contourpy-1.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# cycler-0.12.1-py3-none-any.whl  sha256:<computed_hash>
+# fonttools-4.49.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# kiwisolver-1.4.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# matplotlib-3.8.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# mmcv-lite-2.1.0-py2.py3-none-any.whl  sha256:<computed_hash>
+# mmdet-3.3.0-py2.py3-none-any.whl  sha256:<computed_hash>
+# mmengine-0.10.4-py3-none-any.whl  sha256:<computed_hash>
+# mmsegmentation-1.2.2-py3-none-any.whl  sha256:<computed_hash>
+# numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# openmim-0.3.9-py2.py3-none-any.whl  sha256:<computed_hash>
+# opencv_python-4.10.0.84-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# packaging-24.1-py3-none-any.whl  sha256:<computed_hash>
+# pillow-10.4.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# prettytable-3.11.0-py3-none-any.whl  sha256:<computed_hash>
+# pyparsing-3.1.1-py3-none-any.whl  sha256:<computed_hash>
+# python-dateutil-2.8.2-py2.py3-none-any.whl  sha256:<computed_hash>
+# pyyaml-6.0.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# rich-13.8.0-py3-none-any.whl  sha256:<computed_hash>
+# scipy-1.11.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl  sha256:<computed_hash>
+# setuptools-70.0.0-py3-none-any.whl  sha256:<computed_hash>
+# six-1.16.0-py2.py3-none-any.whl  sha256:<computed_hash>
+# torch-2.1.2+cpu-cp310-cp310-linux_x86_64.whl  sha256:<computed_hash>
+# torchvision-0.16.2+cpu-cp310-cp310-manylinux1_x86_64.whl  sha256:<computed_hash>
+# tqdm-4.66.5-py3-none-any.whl  sha256:<computed_hash>
+# yapf-0.40.2-py2.py3-none-any.whl  sha256:<computed_hash>

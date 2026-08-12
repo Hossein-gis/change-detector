@@ -1,0 +1,56 @@
+# ============================================================
+# Project:      OpenCD Change Detection
+# Version:      v1.0
+# Created:      2026-07-10
+# Purpose:      Git ignore rules
+# Last Updated: 2026-07-10
+# ============================================================
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Data (large files, mounted as volumes)
+Data/output/*
+Data/temp/*
+Data/LEVIR-CD/
+Data/LEVIR-CD+.zip
+!Data/output/.gitkeep
+!Data/temp/.gitkeep
+
+# Weights (large model files, mounted as volumes)
+weights/**/*.pth
+!weights/.gitkeep
+
+# Wheels (populated externally)
+wheels/
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# Docker
+Docker/*.log
+
+# OS
+.DS_Store
+Thumbs.db
