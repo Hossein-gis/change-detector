@@ -1,20 +1,17 @@
 # ============================================================
 # Project:      OpenCD Change Detection
-# Version:      v1.0
-# Created:      2026-07-10
-# Purpose:      Docker Compose for change detection inference
-# Last Updated: 2026-07-10
+# Version:      v1.0-gpu
+# Purpose:      Docker Compose for change detection inference (GPU)
+# Target GPU:   NVIDIA RTX 5080 (Blackwell, sm_120)
 # ============================================================
 
 services:
-
-  opencd-cpu:
-
+  opencd-gpu:
     build:
       context: .
       dockerfile: Dockerfile
-    image: opencd-cpu
-    container_name: opencd-cpu
+    image: opencd-gpu
+    container_name: opencd-gpu
     shm_size: 8gb
     stdin_open: true
     tty: true
@@ -24,5 +21,10 @@ services:
       - ../Data:/workspace/open-cd/data
       - ../Checkpoints:/workspace/open-cd/ckpt
       - ../OpenCD:/workspace/open-cd/files
-
-
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
